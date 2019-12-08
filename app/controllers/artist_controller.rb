@@ -1,27 +1,26 @@
 class ArtistController < ApplicationController
   def show
-    @recipe = Recipe.find(params[:id])
+    @artist = Artist.find(params[:id])
   end
 
   def index
-    @recipes = Recipe.all
+    @artists = Artist.all
   end
 
   def new
-    @recipe = Recipe.new
-    @recipe.ingredients.build(name: "First Ingredient")
-    @recipe.ingredients.build(name: "Second Ingredient")
+    @artist = Artist.new
+    @artist.songs.build(name: "Title", album: "Album")
   end
 
   def create
-    Recipe.create(recipe_params)
-    redirect_to recipes_path
+    Artist.create(artist_params)
+    redirect_to artist_path
   end
 
-  def recipe_params
-    params.require(:recipe).permit(
+  def artist_params
+    params.require(:artist).permit(
       :title,
-      ingredients_attributes: [ :name, :quantity ]
+      songs_attributes: [ :name, :album ]
     )
   end
 end
