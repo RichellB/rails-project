@@ -1,14 +1,30 @@
-<%= form_for @song do |f| %>
-  <%= f.label "Song title:" %>
-  <%= f.text_field :title %><br/>
+<%= form_for @artist do |f| %>
+  <%= f.label "Artist Name:" %>
+  <%= f.text_field :name %><br/>
 
-  <%= f.fields_for :genres do |sec_form| %>
-    <%= sec_form.label :name %>
-    <%= sec_form.text_field :name %><br/>
+  <%= f.fields_for :songs do |sec_form| %>
+    <%= sec_form.label :title %>
+    <%= sec_form.text_field :title %><br/>
 
-    <%= sec_form.label :album %>
-    <%= sec_form.text_field :album %><br/>
+    <%= sec_form.label :album_name %>
+    <%= sec_form.text_field :album_name %><br/>
   <% end %>
 
   <%= f.submit %>
+<% end %>
+
+
+<% if @artist.errors.any? %>
+  <div id="error_explanation">
+    <h2>
+      <%= pluralize(@artist.errors.count, "error") %>
+      prohibited this post from being saved:
+    </h2>
+ 
+    <ul>
+    <% @artist.errors.full_messages.each do |msg| %>
+      <li><%= msg %></li>
+    <% end %>
+    </ul>
+  </div>
 <% end %>
