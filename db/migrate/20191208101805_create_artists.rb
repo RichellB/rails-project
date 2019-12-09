@@ -2,8 +2,10 @@ class CreateArtists < ActiveRecord::Migration[4.2]
   def change
     create_table :artists do |t|
       t.string :name
-
-      t.timestamps null: false
+      t.text :email_address
+      t.string :username
+      t.string :password_digest
+      t.timestamps
     end
   end
 end
