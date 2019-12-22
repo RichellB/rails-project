@@ -1,9 +1,9 @@
-<h2> <%= @genre.name %></h2>
+<h2> <%= @artist.name %></h2>
 
-<h3>LIST OF GENRES</h3>
+<h3>LIST OF SONGS IN LIBRARY</h3>
 
 <ul>
-<% @genre.songs.each do |song| %>
-  <li><%= "#{song.title} X #{song.album}" %></li>
-<% end %>
+  <% @artist.songs.each do |song| %>
+    <li><%= link_to song.title, artist_song_path(@artist, song) %></li>
+  <% end %>
 </ul>
