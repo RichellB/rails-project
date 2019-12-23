@@ -1,86 +1,52 @@
-class SongController < ApplicationController
+class SongsController < ApplicationController
+  def index
+    @songs = Song.all
+  end
 
-get '/songs' do
-    if is_logged_in?
-      @songs = Song.all
-      erb :'/songs/all_songs'
+  def show
+    @song = Song.find(params[:id])
+  end
+
+  def new
+    @song = Song.new
+  end
+
+  def create
+    @song = Song.new(song_params)
+
+    if @song.save
+      redirect_to @song
     else
-      redirect to '/sessions/login'
+      render :new
     end
   end
 
-  get '/songs/new' do
-    if is_logged_in?
-      erb :'songs/new'
+  def edit
+    @song = Song.find(params[:id])
+  end
+
+  def update
+    @song = Song.find(params[:id])
+
+    @song.update(song_params)
+
+    if @song.save
+      redirect_to @song
     else
-      redirect to '/sessions/login'
-    end
-  end
-  
-   post '/songs' do
-    if is_logged_in?
-      if params[:title] == ""
-        redirect to "/songs/new"
-      else
-        song = current_user.songs.build(title: params[:title], album_name: params[:album_name])
-        if song.save
-          redirect to "/songs"
-        end
-      end
+      render :edit
     end
   end
 
-  get '/songs/:id' do
-    if is_logged_in?
-      @song = Song.find_by_id(params[:id])
-      erb :"songs/show"
-    end
+  def destroy
+    @song = Song.find(params[:id])
+    @song.destroy
+    flash[:notice] = "Song deleted."
+    redirect_to songs_path
   end
 
-  get '/songs/:id/edit' do
-    if is_logged_in?
-      @artists = Artist.all
-      @song = Song.find_by_id(params[:id])
-      if @song && @song.artist == current_user
-        erb :'songs/edit'
-      else
-        redirect to '/songs'
-      end
-    else
-      redirect to '/sessions/login'
-    end
-  end
+  private
 
-  patch '/songs/:id' do
-    if is_logged_in?
-      if params[:title] == ""
-        redirect to "/songs/#{params[:id]}/edit"
-      else
-        @song = Song.find_by_id(params[:id])
-        if @song && @song.artist == current_user
-          if @song.update(title: params[:title])
-            redirect to "/songs/#{@song.id}"
-          else
-            redirect to "/songs/#{@song.id}/edit"
-          end
-        else
-          redirect to '/songs'
-        end
-      end
-    else
-      redirect to '/sessions/login'
-    end
-  end
-
-  delete '/songs/:id' do
-    if is_logged_in?
-      @song = Song.find_by_id(params[:id])
-      if @song && @song.artist == current_user
-        @song.delete
-      end
-      redirect to '/songs'
-    else
-      redirect to '/sessions/login'
-    end
+  def song_params
+    params.require(:song).permit(:title, :artist_name)
   end
 end

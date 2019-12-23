@@ -46,4 +46,5 @@ group :development, :test do
   gem 'database_cleaner'
   gem 'pry'
   gem 'omniauth-facebook'
+  gem 'bcrypt'
 end
