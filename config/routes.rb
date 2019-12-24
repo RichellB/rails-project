@@ -7,5 +7,7 @@ Rails.application.routes.draw do
   end
   resources :songs
   
-  get '/auth/facebook/callback' => 'sessions#create'
+  get '/auth/facebook/callback' => 'sessions#createf'
+  get '/home' => 'welcome#home'
+  get '/sessions/login' => 'sessions#login'
 end

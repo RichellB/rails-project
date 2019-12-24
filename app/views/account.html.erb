@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>title</title>
+    <link rel="stylesheet" href="stylesheets/bootstrap.css" type="text/css">  
+  </head>
+  <body id="page-top">
+    <% if is_logged_in? %>
+      <h2> <%= current_user.name %>'s User Library!</h2>
+      <h3>What would you like to do today?</h3>
+      </br>
+      <h3><a href="/songs">Display All Songs In Library</a></h3>
+      <h3><a href="/songs/new">Add A New Song</a></h3>
+      
+      </br>
+      <h5><a href="/logout">Click Here To Log Out</a></h5>
+    <% end %>
+  </body>
+</html>
