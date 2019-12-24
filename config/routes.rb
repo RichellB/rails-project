@@ -6,4 +6,6 @@ Rails.application.routes.draw do
     resources :songs, only: [:index, :show]
   end
   resources :songs
+  
+  get '/auth/facebook/callback' => 'sessions#create'
 end
