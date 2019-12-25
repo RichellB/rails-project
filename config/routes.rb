@@ -10,4 +10,5 @@ Rails.application.routes.draw do
   get '/auth/facebook/callback' => 'sessions#createf'
   get '/home' => 'welcome#home'
   get '/sessions/login' => 'sessions#login'
+  get '/registration/signup' => 'registration#signup'
 end
