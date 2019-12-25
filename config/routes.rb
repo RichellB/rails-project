@@ -6,9 +6,11 @@ Rails.application.routes.draw do
     resources :songs, only: [:index, :show]
   end
   resources :songs
+  resources :genres
   
   get '/auth/facebook/callback' => 'sessions#createf'
   get '/home' => 'welcome#home'
+ 
   get '/sessions/login' => 'sessions#login'
-  get '/registration/signup' => 'registration#signup'
+  get '/sessions/signup' => 'sessions#signup'
 end
