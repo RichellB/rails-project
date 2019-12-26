@@ -3,8 +3,6 @@ class Song < ActiveRecord::Base
   belongs_to :genre
   
   validates :title, presence: true
-  #validates :artist_name, presence: true
-  
 
   def artist_name
     self.try(:artist).try(:name)

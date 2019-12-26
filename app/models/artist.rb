@@ -1,11 +1,13 @@
 class Artist < ActiveRecord::Base
   has_many :songs
-  has_many :genres, through: :songs
+  #has_many :genres, through: :songs
+  has_many :users, through: :songs
   has_secure_password 
   
-  validates_presence_of :name  #, :email_address, :username
-  #validates :username, uniqueness: true 
-  #validates :email_address, uniqueness: true 
- # validates :password, length: { in: 8..16 }
+  belongs_to :genre
+  accepts_nested_attributes_for :genres
+  
+  validates :email_address, uniqueness: true
+  validates_presence_of :username
 
 end
