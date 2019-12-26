@@ -10,35 +10,6 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20191208214307) do
-
-  create_table "artists", force: :cascade do |t|
-    t.string   "name"
-    t.text     "email_address"
-    t.string   "username"
-    t.string   "password_digest"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  create_table "genres", force: :cascade do |t|
-    t.string   "genre_name"
-    t.string   "artist_id"
-    t.string   "song_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  create_table "songs", force: :cascade do |t|
-    t.string   "title"
-    t.string   "album_name"
-    t.string   "genre_name"
-    t.string   "artist_name"
-    t.string   "release_year"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.integer  "artist_id"
-    t.index ["artist_id"], name: "index_songs_on_artist_id"
-  end
+ActiveRecord::Schema.define(version: 0) do
 
 end

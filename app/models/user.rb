@@ -1,4 +1,6 @@
 class User < ApplicationRecord  #ActiveRecird__Base
+  # Include default devise modules. Others available are:
+  # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   attr_accessor :name, :email, :image, :uid
   
   devise :database_authenticatable, :registerable,
