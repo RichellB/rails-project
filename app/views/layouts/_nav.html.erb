@@ -3,6 +3,16 @@
     <% if !user_signed_in? %>
         <li><%= link_to "Login", new_user_session_path %></li>
         <li><%= link_to "Signup", new_user_registration_path %></li>
+        
+          <% if session[:user_id] %>
+              <h1><%= @user.name %></h1>
+              <h2>Email: <%= @user.email %></h2>
+              <h2>Facebook UID: <%= @user.uid %></h2>
+              <img src="<%= @user.image %>">
+          <% else %>
+            <%= link_to('Log in with Facebook!', '/auth/facebook') %>
+          <% end %>
+          
     <% else %>
         <li><%= link_to "Add a New Artist to Library", new_artist_path %> </li>
         <li><%= link_to "Add a New Song to Library", new_song_path %> </li>

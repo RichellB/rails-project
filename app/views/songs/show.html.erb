@@ -13,3 +13,8 @@
 <%= link_to 'Edit', edit_song_path(@song) %>
 
 <%= link_to "All Songs", songs_path %>
+
+<form method="post" action="/songs/<%=@song.id%>">
+  <input type="hidden" name="_method" value="DELETE" />
+  <input type="submit" value="DELETE" />
+</form>
