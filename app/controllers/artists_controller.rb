@@ -5,7 +5,6 @@ class ArtistsController < ApplicationController
 
     def new
         @artist = Artist.new
-        #@artist.build_song
     end
 
     def create
@@ -13,7 +12,6 @@ class ArtistsController < ApplicationController
         if @artist.save
             redirect_to artists_path
         else
-           # @artist.build_song
             render :new
         end
     end

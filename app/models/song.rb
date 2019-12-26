@@ -12,4 +12,8 @@ class Song < ActiveRecord::Base
     self.artist = artist
   end
   
+  def artist_name
+    self.try(:artist).try(:name)
+  end
+  
 end

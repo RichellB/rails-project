@@ -7,6 +7,8 @@ class Artist < ActiveRecord::Base
   
   accepts_nested_attributes_for :songs
   
+  validates_presence_of :name
+  
   def self.alphabetical_order
     order(:name)
   end
