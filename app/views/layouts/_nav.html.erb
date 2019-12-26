@@ -5,6 +5,7 @@
         <li><%= link_to "Signup", new_user_registration_path %></li>
     <% else %>
         <li><%= link_to "Add a New Artist to Library", new_artist_path %> </li>
-        <li><%= link_to "Logout", destroy_user_session_path, method: "delete" %></li>
+        <li><%= link_to "Add a New Song to Library", new_song_path %> </li>
+        <li><%= link_to('Logout', destroy_user_session_path, :method => :delete) %></li>
     <% end %>
     

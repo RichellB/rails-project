@@ -9,6 +9,6 @@ class User < ApplicationRecord  #ActiveRecird__Base
   has_many :songs
   has_many :artists, through: :songs
 
-  validates :email_address, uniqueness: true
-  validates :email_address, presence: true
+  validates :email, uniqueness: true
+  validates :email, presence: true
 end

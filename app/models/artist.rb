@@ -1,13 +1,14 @@
 class Artist < ActiveRecord::Base
   has_many :songs
-  #has_many :genres, through: :songs
+  has_many :genres, through: :songs
   has_many :users, through: :songs
-  has_secure_password 
   
-  belongs_to :genre
-  accepts_nested_attributes_for :genres
+  #belongs_to :genre
   
-  validates :email_address, uniqueness: true
-  validates_presence_of :username
+  accepts_nested_attributes_for :songs
+  
+  def self.alphabetical_order
+    order(:name)
+  end
 
 end

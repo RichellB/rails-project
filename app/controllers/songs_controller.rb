@@ -18,7 +18,7 @@ class SongsController < ApplicationController
     end
 
     def create
-        @songs = current_user.songs.build(song_params)
+        @song = current_user.songs.build(song_params)
         if @song.save
             redirect_to song_path(@song)
         else
@@ -31,7 +31,8 @@ class SongsController < ApplicationController
     end
 
     private
+    
     def song_params
-        params.require(:song).permit(:title, :release_year, :genre_id :artist_id)
+        params.require(:song).permit(:title, :album_name, :artist, :release_year, :genre)
     end
 end
