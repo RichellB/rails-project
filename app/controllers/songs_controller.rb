@@ -1,69 +1,37 @@
 class SongsController < ApplicationController
- def index
-    if params[:artist_id]
-      @artist = Artist.find_by(id: params[:artist_id])
-      if @artist.nil?
-        redirect_to artists_path, alert: "Artist not found"
-      else
-        @songs = @artist.songs
-      end
-    else
-      @songs = Song.all
+
+  def index
+        if @artist = Artist.find_by_id(params[:artist_id])
+            @songs = @artist.songs.all
+        else
+            @songs = Song.all
+        end   
+
     end
-  end
 
-  def show
-    if params[:artist_id]
-      @artist = Artist.find_by(id: params[:artist_id])
-      @song = @artist.songs.find_by(id: params[:id])
-      if @song.nil?
-        redirect_to artist_songs_path(@artist), alert: "Song not found"
-      end
-    else
-      @song = Song.find(params[:id])
+    def new
+        if @artist = Artist.find_by_id(params[:artist_id])
+            @song = @artist.songs.build
+        else
+            @song = Song.new
+        end    
     end
-  end
 
-  def new
-    @song = Song.new
-  end
-
-  def create
-    @song = Song.new(song_params)
-
-    if @song.save
-      redirect_to @song
-    else
-      render :new
+    def create
+        @songs = current_user.songs.build(song_params)
+        if @song.save
+            redirect_to song_path(@song)
+        else
+            render :new
+        end
     end
-  end
 
-  def edit
-    @song = Song.find(params[:id])
-  end
-
-  def update
-    @song = Song.find(params[:id])
-
-    @song.update(song_params)
-
-    if @song.save
-      redirect_to @song
-    else
-      render :edit
+    def show
+        @song = Song.find_by_id(params[:id])
     end
-  end
 
-  def destroy
-    @song = Song.find(params[:id])
-    @song.destroy
-    flash[:notice] = "Song deleted."
-    redirect_to songs_path
-  end
-
-  private
-
-  def song_params
-    params.require(:song).permit(:title, :album_name, :artist_name, :release_year, :genre_name)
-  end
+    private
+    def song_params
+        params.require(:song).permit(:title, :release_year, :genre_id :artist_id)
+    end
 end

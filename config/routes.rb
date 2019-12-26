@@ -5,13 +5,12 @@ Rails.application.routes.draw do
   resources :artists do
     resources :songs, only: [:index, :show]
   end
+  
   resources :songs
   resources :genres
   
-  get '/auth/facebook/callback' => 'sessions#createf'
-
-  get '/sessions/signup' => 'sessions#signup'
-  
-  devise_for :artists, :controllers => {registrations: 'registrations' }
+  devise_for :users, :controllers => {registrations: 'registrations'}
   root to: 'application#home'
+  
+  get '/auth/facebook/callback' => 'sessions#createf'
 end
