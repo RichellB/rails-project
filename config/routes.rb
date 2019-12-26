@@ -9,8 +9,9 @@ Rails.application.routes.draw do
   resources :genres
   
   get '/auth/facebook/callback' => 'sessions#createf'
-  get '/home' => 'welcome#home'
- 
-  get '/sessions/login' => 'sessions#login'
+
   get '/sessions/signup' => 'sessions#signup'
+  
+  devise_for :artists, :controllers => {registrations: 'registrations' }
+  root to: 'application#home'
 end
